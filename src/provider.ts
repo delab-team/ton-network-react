@@ -2,8 +2,10 @@
 /* eslint-disable max-len */
 import { TonConnectUI } from '@tonconnect/ui'
 import { Address, Cell, Contract, ContractProvider, OpenedContract, TonClient4 } from 'ton'
+import { getHttpV4Endpoint } from '@orbs-network/ton-access'
 import { SenderTonConnect } from './sender'
 import { UIProviderTonConnect } from './UIcontract'
+
 
 export interface NetworkProvider {
     network(): 'mainnet' | 'testnet';
@@ -32,16 +34,24 @@ export class ProviderTonConnect implements NetworkProvider {
 
     private _network: 'mainnet' | 'testnet'
 
+    private _endpoint: string
+
     constructor (wallet: TonConnectUI, isTestnet: boolean) {
         this._wallet = wallet
 
-        this._client = new TonClient4({
-            endpoint: isTestnet
-                ? 'https://testnet.tonhubapi.com/jsonRPC'
-                : 'https://mainnet.tonhubapi.com/jsonRPC'
-        })
+        this._client = new TonClient4({ endpoint: '' })
 
         this._network = isTestnet ? 'testnet' : 'mainnet'
+
+        this._endpoint = ''
+    }
+
+    public async sunc (): Promise<void> {
+        const endpoint = await getHttpV4Endpoint({ network: this._network })
+
+        this._client = new TonClient4({ endpoint })
+
+        this._endpoint = endpoint
     }
 
     public network (): 'mainnet' | 'testnet' {
@@ -53,11 +63,7 @@ export class ProviderTonConnect implements NetworkProvider {
     }
 
     public api (): TonClient4 {
-        return new TonClient4({
-            endpoint: this._network === 'testnet'
-                ? 'https://testnet.tonhubapi.com/jsonRPC'
-                : 'https://mainnet.tonhubapi.com/jsonRPC'
-        })
+        return new TonClient4({ endpoint: this._endpoint })
     }
 
     public provider (address: Address, init?: {

@@ -1,6 +1,6 @@
 {
   "name": "@delab-team/ton-network-react",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "NetworkProvider for Contracts",
   "repository": "https://github.com/delab-team/ton-network-react",
   "homepage": "https://github.com/delab-team/ton-network-react",
@@ -22,6 +22,8 @@
     "build2": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
+    "@orbs-network/ton-access": "^2.3.3",
+    "@ton/core": "^0.52.2",
     "@tonconnect/ui": "^2.0.0-beta.2",
     "@types/react": "^18.2.21",
     "react-dom": "^18.2.0",

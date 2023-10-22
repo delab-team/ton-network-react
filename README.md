@@ -12,7 +12,7 @@
   </a>
 </p>
 
-<p align="center">The @delab-team/ton-network-provider library is a powerful tool designed to streamline the process of interacting with the TON (Telegram Open Network) blockchain's smart contracts on the frontend of your web applications.</p>
+<p align="center">The @delab-team/ton-network-provider library .</p>
 
 ## Install
 ```jsx
@@ -21,10 +21,11 @@ yarn add @delab-team/ton-network-provider
 
 ## Usage
 ```typescript
-import { ProviderTonConnect } from '@delab-team/ton-network-provider'
-import { useTonConnectUI } from '@tonconnect/ui-react'
+import { ProviderTonConnect } from '@delab-team/ton-network-react'
+import { TonConnectUI } from '@tonconnect/ui'
 
-const [tonConnectUI, setOptions] = useTonConnectUI()
+const isTestnet = true
+const provider = new ProviderTonConnect(TonConnectUI, isTestnet)
 
-const networkProvider = new ProviderTonConnect(wallet: TonConnectUI, isTestnet: boolean)
+await provider.sunc() // required for loading endpoint TonClient4
 ```

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export interface UIProvider {
     write(message: string): void;
@@ -16,29 +17,29 @@ export class UIProviderTonConnect implements UIProvider {
     }
 
     public write (message: string): void {
-        this._ui.log('UIProvider write', message)
+        window.alert(message)
     }
 
     public async prompt (message: string): Promise<boolean> {
-        this._ui.log('UIProvider prompt', message)
-        return true
+        const data = await window.confirm(message)
+        return data
     }
 
     public async input (message: string): Promise<string> {
-        this._ui.log('UIProvider input', message)
-        return ''
+        const data = await window.prompt(message)
+        return data ?? ''
     }
 
     public async choose<T> (message: string, choices: T[], display: (v: T) => string): Promise<T> {
-        this._ui.log('UIProvider choose', message)
+        window.alert('choose dont support')
         return choices[0]
     }
 
     public setActionPrompt (message: string): void {
-        this._ui.log('UIProvider setActionPrompt', message)
+        window.alert('setActionPrompt dont support')
     }
 
     public clearActionPrompt (): void {
-        this._ui.log('UIProvider clearActionPrompt', true)
+        window.alert('clearActionPrompt dont support')
     }
 }

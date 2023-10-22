@@ -1,11 +1,15 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
 import { TonConnectUI } from '@tonconnect/ui'
-import { Address, Cell, Contract, ContractProvider, OpenedContract, TonClient4 } from 'ton'
+import { Address, Cell, Contract, ContractProvider, OpenedContract, SendMode, TonClient4 } from 'ton'
 import { getHttpV4Endpoint } from '@orbs-network/ton-access'
 import { SenderTonConnect } from './sender'
 import { UIProviderTonConnect } from './UIcontract'
 
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
 export interface NetworkProvider {
     network(): 'mainnet' | 'testnet';
@@ -79,11 +83,38 @@ export class ProviderTonConnect implements NetworkProvider {
     }
 
     public async waitForDeploy (address: Address, attempts?: number, sleepDuration?: number): Promise<void> {
-        const test = this._network
+        let wait = true
+        const _sleepDuration = sleepDuration ?? 1000
+        const _attempts = attempts ?? 60
+        const _countInteration = _attempts
+        let i = 0
+        while (wait) {
+            i++
+            await sleep(_sleepDuration)
+
+            const isDeploy = await this._client.isContractDeployed(0, address)
+            if (isDeploy) {
+                wait = false
+            }
+
+            if (_countInteration === i) {
+                wait = false
+            }
+        }
     }
 
     public async deploy (contract: Contract, value: bigint, body?: Cell, waitAttempts?: number): Promise<void> {
-        const test = this._network
+        const sender = this.sender()
+
+        await sender.send({
+            value,
+            to: contract.address,
+            body,
+            init: contract.init,
+            sendMode: SendMode.PAY_GAS_SEPARATELY
+        })
+
+        await this.waitForDeploy(contract.address, waitAttempts ?? 1)
     }
 
     public open <T extends Contract> (contract: T): OpenedContract<T>  {
@@ -91,7 +122,6 @@ export class ProviderTonConnect implements NetworkProvider {
     }
 
     public ui (): UIProviderTonConnect {
-        const test = this._network
         return new UIProviderTonConnect()
     }
 }

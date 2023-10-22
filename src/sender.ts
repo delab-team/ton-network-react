@@ -20,12 +20,13 @@ export interface Sender {
 }
 
 export class SenderTonConnect implements Sender {
-    public static address: Address | undefined = undefined
+    public address: Address | undefined = undefined
 
     private _wallet: TonConnectUI
 
     constructor (wallet: TonConnectUI) {
         this._wallet = wallet
+        this.address = wallet.account ? Address.parse(wallet.account.address) : undefined
     }
 
     public async send (args: SenderArguments): Promise<void> {

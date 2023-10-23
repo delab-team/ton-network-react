@@ -1,6 +1,6 @@
 {
   "name": "@delab-team/ton-network-react",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "NetworkProvider for Contracts",
   "repository": "https://github.com/delab-team/ton-network-react",
   "homepage": "https://github.com/delab-team/ton-network-react",

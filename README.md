@@ -28,4 +28,10 @@ const isTestnet = true
 const provider = new ProviderTonConnect(TonConnectUI, isTestnet)
 
 await provider.sunc() // required for loading endpoint TonClient4
+
+const contractOpened = this._provider.open(contract)
+
+await contractOpened.deploy(provider.sender(), '1000000')
 ```
+
+An example of use can be seen here - https://github.com/delab-team/de-donate/blob/main/src/logic/smart.ts

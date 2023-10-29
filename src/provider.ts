@@ -51,9 +51,12 @@ export class ProviderTonConnect implements NetworkProvider {
     }
 
     public async sunc (): Promise<void> {
-        let endpoint = await getHttpV4Endpoint({ network: this._network })
+        // let endpoint = await getHttpV4Endpoint({ network: this._network })
+        let endpoint = ''
         if (this._network === 'mainnet') {
             endpoint = 'https://mainnet-v4.tonhubapi.com'
+        } else {
+            endpoint = 'https://testnet-v4.tonhubapi.com'
         }
 
         this._client = new TonClient4({ endpoint })

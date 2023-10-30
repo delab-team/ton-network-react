@@ -43,15 +43,8 @@ export class ProviderTonConnect implements NetworkProvider {
     constructor (wallet: TonConnectUI, isTestnet: boolean) {
         this._wallet = wallet
 
-        this._client = new TonClient4({ endpoint: '' })
-
         this._network = isTestnet ? 'testnet' : 'mainnet'
 
-        this._endpoint = ''
-    }
-
-    public async sunc (): Promise<void> {
-        // let endpoint = await getHttpV4Endpoint({ network: this._network })
         let endpoint = ''
         if (this._network === 'mainnet') {
             endpoint = 'https://mainnet-v4.tonhubapi.com'
@@ -59,9 +52,9 @@ export class ProviderTonConnect implements NetworkProvider {
             endpoint = 'https://testnet-v4.tonhubapi.com'
         }
 
-        this._client = new TonClient4({ endpoint })
-
         this._endpoint = endpoint
+
+        this._client = new TonClient4({ endpoint: this._endpoint })
     }
 
     public network (): 'mainnet' | 'testnet' {

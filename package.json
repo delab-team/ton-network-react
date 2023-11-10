@@ -1,6 +1,6 @@
 {
   "name": "@delab-team/ton-network-react",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "NetworkProvider for Contracts",
   "repository": "https://github.com/delab-team/ton-network-react",
   "homepage": "https://github.com/delab-team/ton-network-react",
@@ -18,27 +18,18 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production",
-    "build2": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@orbs-network/ton-access": "^2.3.3",
-    "@ton/core": "^0.52.2",
+    "@ton/ton": "^13.9.0",
+    "@ton/core": "^0.53.0",
     "@tonconnect/ui": "^2.0.0-beta.2",
     "@types/react": "^18.2.21",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "stream-browserify": "^3.0.0",
-    "ton": "^13.6.1",
-    "ton-core": "^0.52.0",
     "ton-crypto": "^3.2.0"
   },
   "private": false,
   "devDependencies": {
     "@types/node": "^18.7.6",
-    "@types/react-dom": "^18.2.7",
-    "@types/webpack": "^5.28.2",
-    "@types/webpack-dev-server": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.20.0",
@@ -47,11 +38,9 @@
     "eslint-import-resolver-typescript": "^3.3.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-storybook": "^0.6.13",
-    "node-polyfill-webpack-plugin": "^2.0.1",
     "os-browserify": "^0.3.0",
     "process": "^0.11.10",
     "prop-types": "15.8.1",
-    "react": "^18.2.0",
     "source-map-loader": "^1.0.0",
     "ts-loader": "^9.3.1",
     "ts-node": "^10.9.1",
@@ -60,9 +49,7 @@
     "url": "^0.11.0",
     "url-loader": "^4.1.1",
     "util": "^0.12.4",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.0"
+    "@ton/blueprint": "^0.13.0"
   },
   "browserslist": {
     "production": [

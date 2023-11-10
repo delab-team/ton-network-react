@@ -1,19 +1,11 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export interface UIProvider {
-    write(message: string): void;
-    prompt(message: string): Promise<boolean>;
-    input(message: string): Promise<string>;
-    choose<T>(message: string, choices: T[], display: (v: T) => string): Promise<T>;
-    setActionPrompt(message: string): void;
-    clearActionPrompt(): void;
-}
+
+import { UIProvider } from "@ton/blueprint"
 
 export class UIProviderTonConnect implements UIProvider {
-    private _ui: Console
 
     constructor () {
-        this._ui = console
     }
 
     public write (message: string): void {
@@ -21,12 +13,12 @@ export class UIProviderTonConnect implements UIProvider {
     }
 
     public async prompt (message: string): Promise<boolean> {
-        const data = await window.confirm(message)
+        const data = window.confirm(message)
         return data
     }
 
     public async input (message: string): Promise<string> {
-        const data = await window.prompt(message)
+        const data = window.prompt(message)
         return data ?? ''
     }
 

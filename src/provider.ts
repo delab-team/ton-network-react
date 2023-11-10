@@ -1,35 +1,19 @@
+/* eslint-disable no-promise-executor-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
 import { TonConnectUI } from '@tonconnect/ui'
-import { Address, Cell, Contract, ContractProvider, OpenedContract, SendMode, TonClient4 } from 'ton'
-import { getHttpV4Endpoint } from '@orbs-network/ton-access'
+import { TonClient4 } from '@ton/ton'
+import { Address, Cell, Contract, ContractProvider, OpenedContract, Sender, SendMode } from '@ton/core'
+
+import { NetworkProvider, UIProvider } from '@ton/blueprint'
+
 import { SenderTonConnect } from './sender'
 import { UIProviderTonConnect } from './UIcontract'
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
-
-export interface NetworkProvider {
-    network(): 'mainnet' | 'testnet';
-    sender(): SenderTonConnect;
-    api(): TonClient4;
-    provider(address: Address, init?: {
-        code?: Cell;
-        data?: Cell;
-    }): ContractProvider;
-    isContractDeployed(address: Address): Promise<boolean>;
-    waitForDeploy(address: Address, attempts?: number, sleepDuration?: number): Promise<void>;
-    /**
-     * @deprecated
-     *
-     * Use your Contract's `sendDeploy` method (or similar) together with `waitForDeploy` instead.
-     */
-    deploy(contract: Contract, value: bigint, body?: Cell, waitAttempts?: number): Promise<void>;
-    open<T extends Contract>(contract: T): OpenedContract<T>;
-    ui(): UIProviderTonConnect;
-}
 
 export class ProviderTonConnect implements NetworkProvider {
     private _wallet: TonConnectUI
@@ -61,7 +45,7 @@ export class ProviderTonConnect implements NetworkProvider {
         return this._network
     }
 
-    public sender (): SenderTonConnect {
+    public sender (): Sender {
         return new SenderTonConnect(this._wallet)
     }
 
@@ -120,7 +104,7 @@ export class ProviderTonConnect implements NetworkProvider {
         return this._client.open(contract)
     }
 
-    public ui (): UIProviderTonConnect {
+    public ui (): UIProvider {
         return new UIProviderTonConnect()
     }
 }

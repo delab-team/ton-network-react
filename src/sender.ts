@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { SendTransactionRequest, TonConnectUI } from '@tonconnect/ui'
-import { Address, Cell, SendMode, beginCell, storeStateInit } from 'ton-core'
-import { Maybe } from 'ton-core/dist/utils/maybe'
+import { Address, beginCell, Cell, Sender, SendMode, storeStateInit } from '@ton/core'
+import { Maybe } from '@ton/core/dist/utils/maybe';
 
 export type SenderArguments = {
     value: bigint;
@@ -14,11 +14,6 @@ export type SenderArguments = {
     }>;
     body?: Maybe<Cell>;
 }
-export interface Sender {
-    readonly address?: Address;
-    send(args: SenderArguments): Promise<void>;
-}
-
 export class SenderTonConnect implements Sender {
     public address: Address | undefined = undefined
 
@@ -50,14 +45,8 @@ export class SenderTonConnect implements Sender {
         try {
             const res = await this._wallet.sendTransaction(tx)
             console.log('tx', res)
-
-            if (res) {
-                console.log('ok', res)
-            } else {
-                console.error('error not tr')
-            }
         } catch (error) {
-            console.error('claimMulti', error)
+            throw new Error(error + '')
         }
     }
 }

@@ -22,7 +22,7 @@ yarn add @delab-team/ton-network-provider
 ## Usage
 ```typescript
 import { ProviderTonConnect } from '@delab-team/ton-network-react'
-import { TonConnectUI } from '@tonconnect/ui'
+import { TonConnectUI } from 'delab-tonconnect-ui'
 
 const isTestnet = true
 const provider = new ProviderTonConnect(TonConnectUI, isTestnet)

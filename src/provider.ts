@@ -4,7 +4,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import { TonConnectUI } from '@tonconnect/ui'
+import { TonConnectUI } from 'delab-tonconnect-ui'
 import { TonClient4 } from '@ton/ton'
 import { Address, Cell, Contract, ContractProvider, OpenedContract, Sender, SendMode } from '@ton/core'
 

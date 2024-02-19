@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { SendTransactionRequest, TonConnectUI } from '@tonconnect/ui'
+import { SendTransactionRequest, TonConnectUI } from 'delab-tonconnect-ui'
 import { Address, beginCell, Cell, Sender, SendMode, storeStateInit } from '@ton/core'
 import { Maybe } from '@ton/core/dist/utils/maybe';
 

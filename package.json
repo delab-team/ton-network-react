@@ -23,7 +23,7 @@
   "dependencies": {
     "@ton/ton": "^13.9.0",
     "@ton/core": "^0.53.0",
-    "@tonconnect/ui": "^2.0.0-beta.2",
+    "@tonconnect/ui": "^2.0.1-beta.0",
     "@types/react": "^18.2.21",
     "ton-crypto": "^3.2.0"
   },
